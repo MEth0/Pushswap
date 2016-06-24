@@ -5,7 +5,7 @@
 ## Login   <morgan@epitech.net>
 ##
 ## Started on  Tue Nov 17 10:24:20 2015 Morgan Simon
-## Last update Thu Jun 23 17:57:41 2016 Morgan SIMON
+## Last update Fri Jun 24 09:55:32 2016 Morgan SIMON
 ##
 
 CC	=	gcc
@@ -24,18 +24,31 @@ SRCS	=	src/main.c	\
 
 OBJS	=	$(SRCS:.c=.o)
 
+ECHO	=	/bin/echo -e
 
-all:		$(NAME)
+
+all:		xxc $(NAME)
+
+xxc:
+		@$(ECHO) "\n\033[0;31mFLAGS : \033[00m" $(CC) $(CFLAGS) "\n"
 
 $(NAME):	$(OBJS)
-		$(CC) $(OBJS) -o $(NAME)
+		@$(CC) $(OBJS) -o $(NAME)
+		@$(ECHO) "\n\e[1;32m >> Pushswap OK <<\e[00m\n"
 
 clean:
-		$(RM) $(OBJS)
+		@$(RM) $(OBJS)
+		@$(ECHO) "\033[0;32mClean OBJ    Files\033[00m"
 
 fclean:		clean
-		$(RM) $(NAME)
+		@$(RM) $(NAME)
+		@$(ECHO) "\033[0;32mClean Binary Files\033[00m"
 
 re:		fclean all
+
+%.o:		%.c
+		@$(CC) $(CFLAGS) -c $< -o $@ && \
+		 $(ECHO) "\033[0;32m ◉  »\033[1;34m" $< "\033[00m" || \
+		 $(ECHO) "\033[0;31m ⊗  »\033[1;34m" $< "\033[00m"
 
 .PHONY:		all clean fclean re
