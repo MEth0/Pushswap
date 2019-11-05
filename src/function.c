@@ -16,7 +16,7 @@ void		list_push_back(t_list *list, int data)
   t_list	*lm;
 
   if ((lm = malloc(sizeof(t_list))) == NULL)
-    return;
+    exit(1);
   lm->data = data;
   lm->prev = list->prev;
   lm->next = list;
@@ -30,7 +30,7 @@ void		list_push_front(t_list *list, int data)
   t_list	*lm;
 
   if ((lm = malloc(sizeof(t_list))) == NULL)
-    return;
+    exit(1);
   lm->data = data;
   lm->next = list->next;
   lm->prev = list;
@@ -41,19 +41,29 @@ void		list_push_front(t_list *list, int data)
 
 void		list_delete_start(t_list *list)
 {
-  if (list->next == list)
+  t_list *tmp = list->next;
+
+  if (list->next == list) {
+    free(list->next);
     return;
-  list->next = list->next->next;
+  }
+  list->next = tmp->next;
   list->next->prev = list;
+  free(tmp);
   return;
 }
 
 void		list_delete_last(t_list *list)
 {
-  if (list->next == list)
+  t_list *tmp = list->prev;
+
+  if (list->next == list) {
+    free(list->prev);
     return;
-  list->prev = list->prev->prev;
+  }
+  list->prev = tmp->prev;
   list->prev->next = list;
+  free(tmp);
   return;
 }
 
@@ -69,4 +79,5 @@ void		free_list(t_list *list)
       free(tmp);
       tmp = suiv;
     }
+  free(list);
 }

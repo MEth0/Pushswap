@@ -16,7 +16,7 @@ t_list		*init()
   t_list	*list;
 
   if ((list = malloc(sizeof(t_list))) == NULL)
-      return (NULL);
+    exit(1);
   list->next = list;
   list->prev = list;
   list->data = 0;
@@ -54,11 +54,11 @@ t_list		*algo(t_list *l_a, t_list *l_b)
 	}
       pb(l_a, l_b);
     }
-  tmp = l_b;
-  while (tmp->next != l_b)
+  tmp = l_b->next;
+  while (tmp != l_b->prev)
     {
-      pa(l_a, l_b);
       tmp = tmp->next;
+      pa(l_a, l_b);
     }
   pa(l_a, l_b);
   if (checking(l_a) != 1)
@@ -100,7 +100,7 @@ int		main(int ac, char **av)
       my_putstr("Error : no parameters\n");
       return (0);
     }
-  while (av[i] != '\0')
+  while (av[i])
     {
       list_push_back(l_a, my_getnbr(av[i]));
       i++;

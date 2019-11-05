@@ -44,8 +44,8 @@ void	pa(t_list *l_a, t_list *l_b)
   if (l_b->next == l_b)
     return ;
   tmp = l_b->next->data;
-  list_delete_start(l_b);
   list_push_front(l_a, tmp);
+  list_delete_start(l_b);
   write(1, "pa ", 3);
   return ;
 }

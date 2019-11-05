@@ -12,7 +12,7 @@ CC	=	gcc
 
 RM	=	rm -f
 
-CFLAGS	+=	-W -Wall -I./include
+CFLAGS	+=	-Wextra -Wall -I./include
 
 NAME	=	push_swap
 
@@ -22,7 +22,7 @@ SRCS	=	src/main.c	\
 		src/ops.c	\
 		src/my_put_nbr.c
 
-OBJS	=	$(SRCS:.c=.o)
+OBJS	=	$(SRCS:%.c=%.o)
 
 ECHO	=	/bin/echo -e
 
